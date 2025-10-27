@@ -41,7 +41,7 @@ export default function CheckAdminPage() {
                 {result.success ? "✅ Admin Found!" : "❌ Admin Not Found!"}
               </h3>
               <p className={`text-sm mt-1 ${result.success ? "text-green-700" : "text-red-700"}`}>
-                {result.message}
+                {String(result.message || '')}
               </p>
               
               {result.admin && (

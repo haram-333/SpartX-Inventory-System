@@ -41,7 +41,7 @@ export default function TestAuthPage() {
                 {result.success ? "✅ Success!" : "❌ Error!"}
               </h3>
               <p className={`text-sm mt-1 ${result.success ? "text-green-700" : "text-red-700"}`}>
-                {result.message || result.error}
+                {String(result.message || result.error || '')}
               </p>
               
               {result.session && (
