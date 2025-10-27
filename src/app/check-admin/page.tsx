@@ -44,7 +44,7 @@ export default function CheckAdminPage() {
                 {String(result.message || '')}
               </p>
               
-              {result.admin && (
+              {result.admin !== undefined && result.admin !== null && (
                 <div className="mt-3">
                   <p className="text-sm font-medium text-green-800">Admin Details:</p>
                   <pre className="text-xs mt-1 p-2 bg-gray-100 rounded overflow-auto">
