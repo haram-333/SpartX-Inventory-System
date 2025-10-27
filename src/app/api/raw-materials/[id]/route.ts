@@ -51,8 +51,9 @@ export async function GET(
 // PUT - Update raw material
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
@@ -114,8 +115,9 @@ export async function PUT(
 // DELETE - Delete raw material
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
