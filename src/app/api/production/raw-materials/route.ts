@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     const agentId = searchParams.get('agentId')
     
     // Build query filter
-    const filter: Record<string, unknown> = {}
+    const filter: any = {}
     
     if (agentId) {
       filter.agentId = new ObjectId(agentId)

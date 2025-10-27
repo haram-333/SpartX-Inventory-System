@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     const endDate = searchParams.get('endDate')
     
     // Build query filter
-    const filter: Record<string, unknown> = {}
+    const filter: any = {}
     
     if (employeeId) {
       filter.employeeId = employeeId

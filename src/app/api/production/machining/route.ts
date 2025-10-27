@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     const shift = searchParams.get('shift')
     const date = searchParams.get('date')
     
-    const filter: Record<string, unknown> = {}
+    const filter: any = {}
     
     if (shift) {
       filter.shift = shift

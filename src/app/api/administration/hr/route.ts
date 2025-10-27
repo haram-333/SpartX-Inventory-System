@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     const status = searchParams.get('status')
     
     // Build query filter
-    const filter: Record<string, unknown> = {}
+    const filter: any = {}
     
     if (department) {
       filter.department = department
