@@ -82,8 +82,8 @@ export async function PUT(
 
     // Find existing user in any collection
     const collections = getAllEmployeeCollections()
-    let existingUser = null
-    let oldCollection = null
+    let existingUser: any = null
+    let oldCollection: string | null = null
     
     for (const collectionName of collections) {
       existingUser = await db.collection(collectionName).findOne({
@@ -96,7 +96,7 @@ export async function PUT(
       }
     }
 
-    if (!existingUser) {
+    if (!existingUser || !oldCollection) {
       return NextResponse.json(
         { success: false, error: "User not found" },
         { status: 404 }
@@ -139,7 +139,7 @@ export async function PUT(
     }
 
     // If role changed, move user to new collection
-    if (oldCollection !== newCollection) {
+    if (oldCollection && oldCollection !== newCollection) {
       // Add to new collection
       const userData = {
         ...existingUser,
@@ -160,10 +160,12 @@ export async function PUT(
       })
     } else {
       // Same role, just update in current collection
-      await db.collection(oldCollection).updateOne(
-        { _id: new ObjectId(resolvedParams.id) },
-        { $set: updateData }
-      )
+      if (oldCollection) {
+        await db.collection(oldCollection).updateOne(
+          { _id: new ObjectId(resolvedParams.id) },
+          { $set: updateData }
+        )
+      }
 
       return NextResponse.json({ 
         success: true, 
