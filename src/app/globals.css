@@ -24,3 +24,86 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Custom animations for futuristic design */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Form input text styling - make text readable */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  color: #1f2937 !important; /* Dark gray text */
+  background-color: #ffffff !important; /* White background */
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important; /* Medium gray for placeholders */
+  opacity: 1 !important;
+}
+
+/* Select dropdown text styling */
+select {
+  color: #1f2937 !important;
+  background-color: #ffffff !important;
+}
+
+/* Select option text styling */
+select option {
+  color: #1f2937 !important;
+  background-color: #ffffff !important;
+}
+
+/* Ensure form inputs have proper contrast */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  border: 1px solid #d1d5db !important;
+  color: #1f2937 !important;
+}
+
+/* Focus state with better contrast */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #6366f1 !important;
+  color: #1f2937 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Remove default button focus styles */
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
