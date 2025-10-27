@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
-import clientPromise from "../../../../lib/mongodb"
+import clientPromise from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
-import { getAllEmployeeCollections } from "../../../../lib/user-collections"
+import { getAllEmployeeCollections } from "@/lib/user-collections"
 
 // GET - Fetch all users from all employee collections
 export async function GET() {

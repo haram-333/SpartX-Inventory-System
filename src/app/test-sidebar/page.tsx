@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Sidebar } from "../../components/layout/sidebar"
+import { Sidebar } from "@/components/layout/sidebar"
 import { Menu, X } from "lucide-react"
 
 export default function TestSidebarPage() {

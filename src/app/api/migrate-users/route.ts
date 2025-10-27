@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import clientPromise from "../../../lib/mongodb"
-import { getCollectionByRole } from "../../../lib/user-collections"
+import clientPromise from "@/lib/mongodb"
+import { getCollectionByRole } from "@/lib/user-collections"
 
 export async function POST() {
   try {

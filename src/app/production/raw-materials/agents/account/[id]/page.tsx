@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../../../../../components/layout/dashboard-layout"
-import { AgentAccountView } from "../../../../../../../components/production/agent-account-view"
-import { auth } from "../../../../../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { AgentAccountView } from "@/components/production/agent-account-view"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function AgentAccountPage({ 

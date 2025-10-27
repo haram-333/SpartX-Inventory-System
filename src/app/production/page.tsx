@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../lib/auth"
-import { DashboardLayout } from "../../components/layout/dashboard-layout"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import Link from "next/link"
 import { Package, Boxes, Cog, Palette, CheckCircle, PackageCheck, Truck, Clock } from "lucide-react"
 

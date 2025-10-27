@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../../../components/layout/dashboard-layout"
-import { RawMaterialForm } from "../../../../../components/production/raw-material-form"
-import { auth } from "../../../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { RawMaterialForm } from "@/components/production/raw-material-form"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 async function getRawMaterial(id: string) {

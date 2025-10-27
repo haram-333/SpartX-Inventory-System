@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../../lib/auth"
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { UsersTable } from "../../../components/administration/users-table"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { UsersTable } from "@/components/administration/users-table"
 
 export default async function UsersPage() {
   const session = await auth()

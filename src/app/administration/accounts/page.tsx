@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { AccountsTable } from "../../../components/administration/accounts-table"
-import { auth } from "../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { AccountsTable } from "@/components/administration/accounts-table"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function AccountsPage() {

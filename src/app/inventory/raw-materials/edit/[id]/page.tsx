@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../../../../lib/auth"
-import { DashboardLayout } from "../../../../../components/layout/dashboard-layout"
-import { RawMaterialsForm } from "../../../../../components/inventory/raw-materials-form"
-import clientPromise from "../../../../../lib/mongodb"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { RawMaterialsForm } from "@/components/inventory/raw-materials-form"
+import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
 interface EditRawMaterialPageProps {

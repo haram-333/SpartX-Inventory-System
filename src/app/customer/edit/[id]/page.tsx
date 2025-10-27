@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../../../lib/auth"
-import { DashboardLayout } from "../../../../components/layout/dashboard-layout"
-import { CustomerForm } from "../../../../components/customer/customer-form"
-import clientPromise from "../../../../lib/mongodb"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { CustomerForm } from "@/components/customer/customer-form"
+import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
 interface EditCustomerPageProps {

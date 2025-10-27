@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../lib/auth"
-import { DashboardLayout } from "../../components/layout/dashboard-layout"
-import { RawMaterialsTable } from "../../components/inventory/raw-materials-table"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { RawMaterialsTable } from "@/components/inventory/raw-materials-table"
 
 export default async function InventoryPage() {
   const session = await auth()

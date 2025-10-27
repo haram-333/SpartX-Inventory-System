@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../../components/layout/dashboard-layout"
-import { ItemForm } from "../../../../components/production/item-form"
-import { auth } from "../../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { ItemForm } from "@/components/production/item-form"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 async function getItem(id: string) {

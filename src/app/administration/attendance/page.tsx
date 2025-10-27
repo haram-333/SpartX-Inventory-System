@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { AttendanceTable } from "../../../components/administration/attendance-table"
-import { auth } from "../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { AttendanceTable } from "@/components/administration/attendance-table"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function AttendancePage() {

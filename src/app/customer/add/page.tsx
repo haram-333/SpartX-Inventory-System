@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../../lib/auth"
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { CustomerForm } from "../../../components/customer/customer-form"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { CustomerForm } from "@/components/customer/customer-form"
 
 export default async function AddCustomerPage() {
   const session = await auth()

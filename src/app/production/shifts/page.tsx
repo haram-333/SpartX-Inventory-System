@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { ShiftsTable } from "../../../components/production/remaining-tables"
-import { auth } from "../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { ShiftsTable } from "@/components/production/remaining-tables"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function ShiftsPage() {

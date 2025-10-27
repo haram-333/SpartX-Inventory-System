@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
-import { HRTable } from "../../../components/administration/hr-table"
-import { auth } from "../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { HRTable } from "@/components/administration/hr-table"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function HRPage() {

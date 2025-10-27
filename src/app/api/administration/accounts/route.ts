@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import clientPromise from "../../../../lib/mongodb"
+import clientPromise from "@/lib/mongodb"
 
 // GET - Fetch all account transactions
 export async function GET(request: Request) {

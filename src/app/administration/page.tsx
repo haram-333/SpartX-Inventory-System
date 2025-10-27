@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../lib/auth"
-import { DashboardLayout } from "../../components/layout/dashboard-layout"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import Link from "next/link"
 import { Users, DollarSign, UserCheck, Calendar } from "lucide-react"
 

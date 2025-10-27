@@ -1,5 +1,6 @@
-import { DashboardLayout } from "../../../../components/layout/dashboard-layout"
-import { auth } from "../../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { MachiningForm } from "@/components/production/machining-form"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 export default async function EditMachiningPage({ params }: { params: { id: string } }) {

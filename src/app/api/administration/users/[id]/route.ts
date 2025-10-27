@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
-import clientPromise from "../../../../lib/mongodb"
+import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 import bcrypt from "bcryptjs"
-import { getAllEmployeeCollections, getCollectionByRole } from "../../../../lib/user-collections"
+import { getAllEmployeeCollections, getCollectionByRole } from "@/lib/user-collections"
 
 // GET - Fetch single user from any collection
 export async function GET(

@@ -1,6 +1,6 @@
-import { DashboardLayout } from "../../../../../../../components/layout/dashboard-layout"
-import { AgentForm } from "../../../../../../../components/production/agent-form"
-import { auth } from "../../../../../../../lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { AgentForm } from "@/components/production/agent-form"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
 async function getAgent(id: string) {

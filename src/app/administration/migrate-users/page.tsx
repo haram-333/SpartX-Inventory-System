@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { DashboardLayout } from "../../../components/layout/dashboard-layout"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { ArrowRight, RefreshCw, CheckCircle, AlertCircle } from "lucide-react"
 
 export default function MigrateUsersPage() {

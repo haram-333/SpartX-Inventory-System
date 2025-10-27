@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
-import { auth } from "../../../../lib/auth"
-import { DashboardLayout } from "../../../../components/layout/dashboard-layout"
-import { RawMaterialsForm } from "../../../../components/inventory/raw-materials-form"
+import { auth } from "@/lib/auth"
+import { DashboardLayout } from "@/components/layout/dashboard-layout"
+import { RawMaterialsForm } from "@/components/inventory/raw-materials-form"
 
 export default async function AddRawMaterialPage() {
   const session = await auth()
