@@ -44,7 +44,7 @@ export default function TestAuthPage() {
                 {String(result.message || result.error || '')}
               </p>
               
-              {result.session && (
+              {result.session !== undefined && result.session !== null && (
                 <div className="mt-3">
                   <p className="text-sm font-medium text-green-800">Session Data:</p>
                   <pre className="text-xs mt-1 p-2 bg-gray-100 rounded overflow-auto">
@@ -53,7 +53,7 @@ export default function TestAuthPage() {
                 </div>
               )}
               
-              {result.details && (
+              {result.details !== undefined && result.details !== null && (
                 <details className="mt-3">
                   <summary className="text-sm font-medium cursor-pointer">Error Details</summary>
                   <pre className="text-xs mt-2 p-2 bg-gray-100 rounded overflow-auto">

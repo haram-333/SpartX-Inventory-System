@@ -27,8 +27,9 @@ async function getTransaction(id: string) {
 export default async function EditAccountPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -41,7 +42,7 @@ export default async function EditAccountPage({
     redirect('/dashboard')
   }
 
-  const transaction = await getTransaction(params.id)
+  const transaction = await getTransaction(resolvedParams.id)
 
   if (!transaction) {
     redirect('/administration/accounts')

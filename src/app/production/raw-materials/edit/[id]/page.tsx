@@ -27,8 +27,9 @@ async function getRawMaterial(id: string) {
 export default async function EditRawMaterialPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -40,7 +41,7 @@ export default async function EditRawMaterialPage({
     redirect('/dashboard')
   }
 
-  const rawMaterial = await getRawMaterial(params.id)
+  const rawMaterial = await getRawMaterial(resolvedParams.id)
 
   if (!rawMaterial) {
     redirect('/production/raw-materials')

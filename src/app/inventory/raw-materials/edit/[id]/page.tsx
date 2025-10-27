@@ -6,12 +6,13 @@ import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
 interface EditRawMaterialPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function EditRawMaterialPage({ params }: EditRawMaterialPageProps) {
+  const resolvedParams = await params
   const session = await auth()
   
   if (!session || !session.user) {
@@ -31,7 +32,7 @@ export default async function EditRawMaterialPage({ params }: EditRawMaterialPag
     const db = client.db("SpartX-Inventory-System")
     
     const materialData = await db.collection("inventory_raw_materials").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (materialData) {

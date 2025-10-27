@@ -23,7 +23,7 @@ export function RawMaterialForm({ initialData, isEdit = false }: RawMaterialForm
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [agents, setAgents] = useState<Array<{ _id: string; name: string; isActive: boolean }>>([])
+  const [agents, setAgents] = useState<Array<{ id: string; name: string; phone: string; isActive: boolean }>>([])
 
   const [formData, setFormData] = useState({
     agentId: initialData?.agentId || '',

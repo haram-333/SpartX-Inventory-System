@@ -27,8 +27,9 @@ async function getEmployee(id: string) {
 export default async function EditHRPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -41,7 +42,7 @@ export default async function EditHRPage({
     redirect('/dashboard')
   }
 
-  const employee = await getEmployee(params.id)
+  const employee = await getEmployee(resolvedParams.id)
 
   if (!employee) {
     redirect('/administration/hr')

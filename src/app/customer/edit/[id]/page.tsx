@@ -6,12 +6,13 @@ import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
 interface EditCustomerPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function EditCustomerPage({ params }: EditCustomerPageProps) {
+  const resolvedParams = await params
   const session = await auth()
   
   if (!session || !session.user) {
@@ -31,7 +32,7 @@ export default async function EditCustomerPage({ params }: EditCustomerPageProps
     const db = client.db("SpartX-Inventory-System")
     
     const customerData = await db.collection("customers").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (customerData) {

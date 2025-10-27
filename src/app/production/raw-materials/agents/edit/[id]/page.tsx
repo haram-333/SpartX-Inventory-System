@@ -27,8 +27,9 @@ async function getAgent(id: string) {
 export default async function EditAgentPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -40,7 +41,7 @@ export default async function EditAgentPage({
     redirect('/dashboard')
   }
 
-  const agent = await getAgent(params.id)
+  const agent = await getAgent(resolvedParams.id)
 
   if (!agent) {
     redirect('/production/raw-materials/agents')

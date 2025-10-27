@@ -14,12 +14,13 @@ async function getItem(id: string) {
   }
 }
 
-export default async function EditItemPage({ params }: { params: { id: string } }) {
+export default async function EditItemPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
   const session = await auth()
   if (!session) redirect('/auth/signin')
   if (!['SUPER_ADMIN', 'ADMIN', 'PRODUCTION'].includes(session.user.role)) redirect('/dashboard')
 
-  const item = await getItem(params.id)
+  const item = await getItem(resolvedParams.id)
   if (!item) redirect('/production/items')
 
   return (

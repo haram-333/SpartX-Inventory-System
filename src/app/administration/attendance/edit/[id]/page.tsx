@@ -27,8 +27,9 @@ async function getAttendance(id: string) {
 export default async function EditAttendancePage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -41,7 +42,7 @@ export default async function EditAttendancePage({
     redirect('/dashboard')
   }
 
-  const attendance = await getAttendance(params.id)
+  const attendance = await getAttendance(resolvedParams.id)
 
   if (!attendance) {
     redirect('/administration/attendance')

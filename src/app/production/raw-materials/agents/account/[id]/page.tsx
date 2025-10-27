@@ -6,8 +6,9 @@ import { redirect } from "next/navigation"
 export default async function AgentAccountPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const resolvedParams = await params
   const session = await auth()
 
   if (!session) {
@@ -28,7 +29,7 @@ export default async function AgentAccountPage({
             View complete transaction history and account summary
           </p>
         </div>
-        <AgentAccountView agentId={params.id} />
+        <AgentAccountView agentId={resolvedParams.id} />
       </div>
     </DashboardLayout>
   )

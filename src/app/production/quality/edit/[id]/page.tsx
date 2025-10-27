@@ -2,7 +2,8 @@ import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
-export default async function EditQualityPage({ params }: { params: { id: string } }) {
+export default async function EditQualityPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
   const session = await auth()
   if (!session) redirect('/auth/signin')
   if (!['SUPER_ADMIN', 'ADMIN', 'PRODUCTION'].includes(session.user.role)) redirect('/dashboard')
@@ -15,7 +16,7 @@ export default async function EditQualityPage({ params }: { params: { id: string
           <p className="mt-1 text-sm text-gray-600">Update inspection details</p>
         </div>
         <div className="bg-white shadow rounded-lg p-6">
-          <p className="text-gray-600">Edit form for inspection ID: {params.id}</p>
+          <p className="text-gray-600">Edit form for inspection ID: {resolvedParams.id}</p>
         </div>
       </div>
     </DashboardLayout>
