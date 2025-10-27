@@ -7,8 +7,9 @@ import { getAllEmployeeCollections, getCollectionByRole } from "@/lib/user-colle
 // GET - Fetch single user from any collection
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
@@ -20,7 +21,7 @@ export async function GET(
     
     for (const collectionName of collections) {
       user = await db.collection(collectionName).findOne({
-        _id: new ObjectId(params.id)
+        _id: new ObjectId(resolvedParams.id)
       })
       
       if (user) {
@@ -85,7 +86,7 @@ export async function PUT(
     
     for (const collectionName of collections) {
       existingUser = await db.collection(collectionName).findOne({
-        _id: new ObjectId(params.id)
+        _id: new ObjectId(resolvedParams.id)
       })
       
       if (existingUser) {
@@ -105,7 +106,7 @@ export async function PUT(
     for (const collectionName of collections) {
       const duplicateEmail = await db.collection(collectionName).findOne({
         email: email,
-        _id: { $ne: new ObjectId(params.id) }
+        _id: { $ne: new ObjectId(resolvedParams.id) }
       })
       
       if (duplicateEmail) {
@@ -142,14 +143,14 @@ export async function PUT(
       const userData = {
         ...existingUser,
         ...updateData,
-        _id: new ObjectId(params.id) // Keep the same ID
+        _id: new ObjectId(resolvedParams.id) // Keep the same ID
       }
       
       await db.collection(newCollection).insertOne(userData)
       
       // Remove from old collection
       await db.collection(oldCollection).deleteOne({
-        _id: new ObjectId(params.id)
+        _id: new ObjectId(resolvedParams.id)
       })
 
       return NextResponse.json({ 
@@ -159,7 +160,7 @@ export async function PUT(
     } else {
       // Same role, just update in current collection
       await db.collection(oldCollection).updateOne(
-        { _id: new ObjectId(params.id) },
+        { _id: new ObjectId(resolvedParams.id) },
         { $set: updateData }
       )
 
@@ -192,7 +193,7 @@ export async function DELETE(
     
     for (const collectionName of collections) {
       const result = await db.collection(collectionName).deleteOne({
-        _id: new ObjectId(params.id)
+        _id: new ObjectId(resolvedParams.id)
       })
       
       if (result.deletedCount > 0) {

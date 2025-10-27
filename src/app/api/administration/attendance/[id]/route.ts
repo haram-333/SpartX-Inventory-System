@@ -5,14 +5,15 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single attendance record
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const attendance = await db.collection("attendance_records").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!attendance) {
@@ -79,7 +80,7 @@ export async function PUT(
 
     // Check if attendance exists
     const existingAttendance = await db.collection("attendance_records").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingAttendance) {
@@ -99,7 +100,7 @@ export async function PUT(
     }
 
     await db.collection("attendance_records").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -126,7 +127,7 @@ export async function DELETE(
     const db = client.db("SpartX-Inventory-System")
     
     const result = await db.collection("attendance_records").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

@@ -2,13 +2,14 @@ import { NextResponse } from "next/server"
 import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const record = await db.collection("paint_records").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!record) {
@@ -55,7 +56,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 
     await db.collection("paint_records").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -71,7 +72,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     const db = client.db("SpartX-Inventory-System")
     
     const result = await db.collection("paint_records").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

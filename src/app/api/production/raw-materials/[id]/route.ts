@@ -5,14 +5,15 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single raw material transaction
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const rawMaterial = await db.collection("raw_materials").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!rawMaterial) {
@@ -86,7 +87,7 @@ export async function PUT(
 
     // Check if raw material exists
     const existingMaterial = await db.collection("raw_materials").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingMaterial) {
@@ -125,7 +126,7 @@ export async function PUT(
     }
 
     await db.collection("raw_materials").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -152,7 +153,7 @@ export async function DELETE(
     const db = client.db("SpartX-Inventory-System")
     
     const result = await db.collection("raw_materials").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

@@ -2,11 +2,12 @@ import { NextResponse } from "next/server"
 import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
-    const record = await db.collection("quality_inspections").findOne({ _id: new ObjectId(params.id) })
+    const record = await db.collection("quality_inspections").findOne({ _id: new ObjectId(resolvedParams.id) })
     if (!record) return NextResponse.json({ success: false, error: "Quality inspection not found" }, { status: 404 })
     
     const item = await db.collection("items").findOne({ _id: record.itemId })
@@ -26,7 +27,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     const body = await request.json()
 
     await db.collection("quality_inspections").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: { 
         date: new Date(body.date),
         inspectorName: body.inspectorName,
@@ -48,7 +49,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
-    await db.collection("quality_inspections").deleteOne({ _id: new ObjectId(params.id) })
+    await db.collection("quality_inspections").deleteOne({ _id: new ObjectId(resolvedParams.id) })
     return NextResponse.json({ success: true, message: "Quality inspection deleted successfully" })
   } catch (error) {
     return NextResponse.json({ success: false, error: "Failed to delete quality inspection" }, { status: 500 })

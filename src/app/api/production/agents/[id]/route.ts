@@ -5,14 +5,15 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single agent
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const agent = await db.collection("agents").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!agent) {
@@ -66,7 +67,7 @@ export async function PUT(
 
     // Check if agent exists
     const existingAgent = await db.collection("agents").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingAgent) {
@@ -79,7 +80,7 @@ export async function PUT(
     // Check if phone is taken by another agent
     const duplicatePhone = await db.collection("agents").findOne({
       phone: phone,
-      _id: { $ne: new ObjectId(params.id) }
+      _id: { $ne: new ObjectId(resolvedParams.id) }
     })
 
     if (duplicatePhone) {
@@ -100,7 +101,7 @@ export async function PUT(
     }
 
     await db.collection("agents").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -128,7 +129,7 @@ export async function DELETE(
     
     // Check if agent has any raw material transactions
     const hasTransactions = await db.collection("raw_materials").findOne({
-      agentId: new ObjectId(params.id)
+      agentId: new ObjectId(resolvedParams.id)
     })
 
     if (hasTransactions) {
@@ -139,7 +140,7 @@ export async function DELETE(
     }
 
     const result = await db.collection("agents").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

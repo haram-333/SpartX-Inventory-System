@@ -5,14 +5,15 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single item
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const item = await db.collection("items").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!item) {
@@ -68,7 +69,7 @@ export async function PUT(
 
     // Check if item exists
     const existingItem = await db.collection("items").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingItem) {
@@ -81,7 +82,7 @@ export async function PUT(
     // Check if item code is taken by another item
     const duplicateItemCode = await db.collection("items").findOne({
       itemCode: itemCode,
-      _id: { $ne: new ObjectId(params.id) }
+      _id: { $ne: new ObjectId(resolvedParams.id) }
     })
 
     if (duplicateItemCode) {
@@ -95,7 +96,7 @@ export async function PUT(
     if (marketCode) {
       const duplicateMarketCode = await db.collection("items").findOne({
         marketCode: marketCode,
-        _id: { $ne: new ObjectId(params.id) }
+        _id: { $ne: new ObjectId(resolvedParams.id) }
       })
 
       if (duplicateMarketCode) {
@@ -119,7 +120,7 @@ export async function PUT(
     }
 
     await db.collection("items").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -147,7 +148,7 @@ export async function DELETE(
     
     // Check if item is used in any production records
     const hasRecords = await db.collection("machining_records").findOne({
-      itemId: new ObjectId(params.id)
+      itemId: new ObjectId(resolvedParams.id)
     })
 
     if (hasRecords) {
@@ -158,7 +159,7 @@ export async function DELETE(
     }
 
     const result = await db.collection("items").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

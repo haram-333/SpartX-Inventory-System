@@ -5,14 +5,15 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single machining record
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     const record = await db.collection("machining_records").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!record) {
@@ -81,7 +82,7 @@ export async function PUT(
     }
 
     const existingRecord = await db.collection("machining_records").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingRecord) {
@@ -103,7 +104,7 @@ export async function PUT(
     }
 
     await db.collection("machining_records").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -130,7 +131,7 @@ export async function DELETE(
     const db = client.db("SpartX-Inventory-System")
     
     const result = await db.collection("machining_records").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {

@@ -5,15 +5,16 @@ import { ObjectId } from "mongodb"
 // GET - Fetch agent account summary
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
     // Get agent details
     const agent = await db.collection("agents").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!agent) {
@@ -25,7 +26,7 @@ export async function GET(
 
     // Get all transactions for this agent
     const transactions = await db.collection("raw_materials")
-      .find({ agentId: new ObjectId(params.id) })
+      .find({ agentId: new ObjectId(resolvedParams.id) })
       .sort({ date: -1 })
       .toArray()
 
