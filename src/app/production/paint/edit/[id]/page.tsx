@@ -1,5 +1,4 @@
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
-import { PaintForm } from "@/components/production/paint-form"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 

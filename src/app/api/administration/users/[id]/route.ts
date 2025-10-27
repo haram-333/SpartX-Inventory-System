@@ -120,7 +120,7 @@ export async function PUT(
     const newCollection = getCollectionByRole(role)
 
     // Prepare update data
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       name,
       email,
       role,

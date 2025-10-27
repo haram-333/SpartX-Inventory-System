@@ -23,7 +23,7 @@ export function RawMaterialForm({ initialData, isEdit = false }: RawMaterialForm
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [agents, setAgents] = useState<any[]>([])
+  const [agents, setAgents] = useState<Array<{ _id: string; name: string; isActive: boolean }>>([])
 
   const [formData, setFormData] = useState({
     agentId: initialData?.agentId || '',
@@ -48,7 +48,7 @@ export function RawMaterialForm({ initialData, isEdit = false }: RawMaterialForm
       const data = await response.json()
       
       if (data.success) {
-        setAgents(data.agents.filter((agent: any) => agent.isActive))
+        setAgents(data.agents.filter((agent: { isActive: boolean }) => agent.isActive))
       }
     } catch (error) {
       console.error('Error fetching agents:', error)

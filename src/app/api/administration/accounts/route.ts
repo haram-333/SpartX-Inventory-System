@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     const endDate = searchParams.get('endDate')
     
     // Build query filter
-    const filter: any = {}
+    const filter: Record<string, unknown> = {}
     
     if (type) {
       filter.type = type

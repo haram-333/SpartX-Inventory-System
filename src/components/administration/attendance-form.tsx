@@ -52,7 +52,7 @@ export function AttendanceForm({ initialData, isEdit = false }: AttendanceFormPr
       const data = await response.json()
       
       if (data.success) {
-        setEmployees(data.employees.filter((emp: any) => emp.status === 'active'))
+        setEmployees(data.employees.filter((emp: { status: string }) => emp.status === 'active'))
       }
     } catch (error) {
       console.error('Error fetching employees:', error)

@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const date = searchParams.get('date')
     
-    const filter: any = {}
+    const filter: Record<string, unknown> = {}
     if (date) {
       const searchDate = new Date(date)
       const nextDay = new Date(searchDate)

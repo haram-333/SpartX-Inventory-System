@@ -28,7 +28,7 @@ export function RawMaterialsTable() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState("")
   const [filterAgent, setFilterAgent] = useState<string>('all')
-  const [agents, setAgents] = useState<any[]>([])
+  const [agents, setAgents] = useState<Array<{ _id: string; name: string }>>([])
 
   useEffect(() => {
     fetchAgents()

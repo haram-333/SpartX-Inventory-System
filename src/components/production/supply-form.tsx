@@ -53,7 +53,7 @@ export function SupplyForm({ initialData, isEdit = false }: SupplyFormProps) {
       const response = await fetch('/api/production/items')
       const data = await response.json()
       if (data.success) {
-        setItems(data.items.filter((item: any) => item.isActive))
+        setItems(data.items.filter((item: { isActive: boolean }) => item.isActive))
       }
     } catch (error) {
       console.error('Error fetching items:', error)

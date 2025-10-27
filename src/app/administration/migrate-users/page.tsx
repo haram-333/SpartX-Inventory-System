@@ -6,7 +6,7 @@ import { ArrowRight, RefreshCw, CheckCircle, AlertCircle } from "lucide-react"
 
 export default function MigrateUsersPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const [result, setResult] = useState<any>(null)
+  const [result, setResult] = useState<{ total: number; migrated: number; skipped: number } | null>(null)
   const [error, setError] = useState("")
 
   const handleMigrate = async () => {

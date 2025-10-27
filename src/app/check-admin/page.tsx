@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 export default function CheckAdminPage() {
-  const [result, setResult] = useState<any>(null)
+  const [result, setResult] = useState<Record<string, unknown> | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const checkAdmin = async () => {

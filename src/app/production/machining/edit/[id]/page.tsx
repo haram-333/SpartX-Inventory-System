@@ -1,5 +1,4 @@
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
-import { MachiningForm } from "@/components/production/machining-form"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 

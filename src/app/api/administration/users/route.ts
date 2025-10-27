@@ -11,7 +11,7 @@ export async function GET() {
     
     // Fetch users from all employee collections
     const collections = getAllEmployeeCollections()
-    const allUsers: any[] = []
+    const allUsers: Array<Record<string, unknown>> = []
     
     for (const collectionName of collections) {
       const users = await db.collection(collectionName).find({}).toArray()

@@ -58,7 +58,7 @@ export default function SetupPage() {
             <p><strong>After creating admin:</strong></p>
             <p>1. Go to <code className="bg-gray-100 px-1 rounded">/auth/signin</code></p>
             <p>2. Login with the credentials above</p>
-            <p>3. You'll be redirected to dashboard</p>
+            <p>3. You&apos;ll be redirected to dashboard</p>
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ export function QualityForm({ initialData, isEdit = false }: QualityFormProps) {
       const response = await fetch('/api/production/items')
       const data = await response.json()
       if (data.success) {
-        setItems(data.items.filter((item: any) => item.isActive))
+        setItems(data.items.filter((item: { isActive: boolean }) => item.isActive))
       }
     } catch (error) {
       console.error('Error fetching items:', error)
@@ -252,7 +252,7 @@ export function QualityForm({ initialData, isEdit = false }: QualityFormProps) {
             </div>
             {calculatedTotal !== totalQuantity && (
               <p className="mt-2 text-sm text-orange-600">
-                ⚠️ Passed + Failed ({calculatedTotal}) doesn't match Total Quantity ({totalQuantity})
+                ⚠️ Passed + Failed ({calculatedTotal}) doesn&apos;t match Total Quantity ({totalQuantity})
               </p>
             )}
           </div>

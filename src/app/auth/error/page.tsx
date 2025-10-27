@@ -45,7 +45,7 @@ export default function AuthErrorPage() {
               </h3>
               <div className="mt-2 text-sm text-red-700">
                 <p>Error Type: {error || 'Unknown'}</p>
-                <p className="mt-1">This usually means there's an issue with the authentication configuration.</p>
+                <p className="mt-1">This usually means there&apos;s an issue with the authentication configuration.</p>
               </div>
             </div>
           </div>
