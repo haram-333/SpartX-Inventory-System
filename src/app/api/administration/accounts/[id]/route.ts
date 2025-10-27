@@ -5,14 +5,16 @@ import { ObjectId } from "mongodb"
 // GET - Fetch single transaction
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
+    const resolvedParams = await params
+    
     const transaction = await db.collection("account_transactions").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!transaction) {
@@ -50,12 +52,13 @@ export async function GET(
 // PUT - Update transaction
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
+    const resolvedParams = await params
     const body = await request.json()
     const { 
       type, 
@@ -93,7 +96,7 @@ export async function PUT(
 
     // Check if transaction exists
     const existingTransaction = await db.collection("account_transactions").findOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (!existingTransaction) {
@@ -116,7 +119,7 @@ export async function PUT(
     }
 
     await db.collection("account_transactions").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(resolvedParams.id) },
       { $set: updateData }
     )
 
@@ -136,14 +139,16 @@ export async function PUT(
 // DELETE - Delete transaction
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const client = await clientPromise
     const db = client.db("SpartX-Inventory-System")
     
+    const resolvedParams = await params
+    
     const result = await db.collection("account_transactions").deleteOne({
-      _id: new ObjectId(params.id)
+      _id: new ObjectId(resolvedParams.id)
     })
 
     if (result.deletedCount === 0) {
